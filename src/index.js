@@ -51,17 +51,14 @@ asyncDemo.demonstrateParaellelPromise();
 // ============================================
 console.log('--- Notes App Mini Project ---');
 
-// TODO: Uncomment these once you implement the notes app
-// const note1 = notesApp.addNote('Learn JavaScript', 'Complete all exercises in week 1');
-// const note2 = notesApp.addNote('Practice Git', 'Work through merge conflict scenarios');
-// console.log('All notes:', notesApp.getAllNotes());
-// console.log('Find note 1:', notesApp.getNoteById(1));
-// notesApp.updateNote(1, 'Learn JavaScript Basics', 'Focus on functions and arrays');
-// console.log('Updated notes:', notesApp.getAllNotes());
-// notesApp.deleteNote(2);
-// console.log('After deletion:', notesApp.getAllNotes());
-
-console.log('(Notes app not yet implemented)\n');
+const note1 = notesApp.addNote('Learn JavaScript', 'Complete all exercises in week 1');
+const note2 = notesApp.addNote('Practice Git', 'Work through merge conflict scenarios');
+console.log('All notes:', notesApp.getAllNotes());
+console.log('Find note 1:', notesApp.getNoteById(1));
+notesApp.updateNote(1, 'Learn JavaScript Basics', 'Focus on functions and arrays');
+console.log('Updated notes:', notesApp.getAllNotes());
+notesApp.deleteNote(2);
+console.log('After deletion:', notesApp.getAllNotes());
 
 // ============================================
 // Your Experimentation Space
@@ -72,5 +69,12 @@ console.log('--- Your Code Here ---');
 // - Try different function inputs
 // - Test edge cases
 // - Combine multiple functions together
+
+console.log('Is "nate" a palindrome?', strings.isPalindrome('nate'));
+notesApp.addNote('Read a book', 'Finish reading Atomic habits book');
+notesApp.addNote('Go for a run', 'Run 5km in the morning');
+console.log([...notesApp.getNotesSortedByDate(false)]);
+notesApp.deleteNote(3);
+console.log('After deletion:', notesApp.getAllNotes());
 
 console.log('\n=== Keep coding! ===');

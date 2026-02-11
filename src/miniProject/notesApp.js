@@ -37,6 +37,16 @@ function addNote(title, content) {
   // 3. Set both createdAt and updatedAt to current date (new Date())
   // 4. Push the note to the notes array
   // 5. Return the created note
+  let newNote = {
+    id: nextId,
+    title: title,
+    content: content,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  };
+  notes.push(newNote);
+  nextId++;
+  return newNote;
 }
 
 // ============================================
@@ -51,6 +61,7 @@ function getAllNotes() {
   // TODO: Implement getAllNotes
   // Hint: Return a copy of the notes array to prevent external modification
   // You can use the spread operator [...notes] or notes.slice()
+  return [...notes];
 }
 
 /**
@@ -62,6 +73,7 @@ function getNoteById(id) {
   // TODO: Implement getNoteById
   // Hint: Use the find() method to search the notes array
   // Return the found note or null
+  return notes.find(note => note.id === id) || null;
 }
 
 /**
@@ -74,6 +86,11 @@ function searchNotes(keyword) {
   // Hint: Use filter() to find notes where title or content includes the keyword
   // Consider converting to lowercase for case-insensitive search
   // Return array of matching notes (empty array if none found)
+  const lowerKeyword = keyword.toLowerCase();
+  return notes.filter(note => 
+    note.title.toLowerCase().includes(lowerKeyword) || 
+    note.content.toLowerCase().includes(lowerKeyword) || null
+  );
 }
 
 // ============================================
@@ -96,6 +113,12 @@ function updateNote(id, newTitle, newContent) {
   // 4. Update content if newContent is provided
   // 5. Update the updatedAt timestamp to current date
   // 6. Return the updated note
+  const noteToUpdate = getNoteById(id);
+  if (!noteToUpdate)return null;
+  
+  if (newTitle) noteToUpdate.title = newTitle;
+  if (newContent) noteToUpdate.content = newContent;
+  return noteToUpdate.updatedAt = new Date();
 }
 
 // ============================================
@@ -111,6 +134,10 @@ function deleteNote(id) {
   // TODO: Implement deleteNote
   // Hint: Use findIndex() to locate the note, then splice() to remove it
   // Return true if deleted, false if note wasn't found
+  const index = notes.findIndex(note => note.id === id);
+  if (index === -1) return false;
+  notes.splice(index, 1);
+  return true;
 }
 
 /**
@@ -124,6 +151,10 @@ function deleteAllNotes() {
   // 2. Clear the notes array
   // 3. Reset nextId to 1
   // 4. Return the count of deleted notes
+  const count = getNotesCount();
+  notes = [];
+  nextId = 1;
+  return count;
 }
 
 // ============================================
@@ -137,6 +168,7 @@ function deleteAllNotes() {
 function getNotesCount() {
   // TODO: Implement getNotesCount
   // Hint: Return the length of the notes array
+  return notes.length;
 }
 
 /**
@@ -149,6 +181,12 @@ function getNotesSortedByDate(ascending = false) {
   // Hint: Create a copy of notes array, then use sort() with a compare function
   // Compare createdAt dates
   // Return the sorted array
+  const sortedNotes = [...notes];
+  return sortedNotes.sort((a, b) => {
+    ascending 
+    ? a.createdAt - b.createdAt 
+    : b.createdAt - a.createdAt
+  });
 }
 
 // Export all functions
