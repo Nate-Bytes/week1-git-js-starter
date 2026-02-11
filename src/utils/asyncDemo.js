@@ -28,8 +28,10 @@ function fetchUserCallback(userId, callback) {
         email: `user${userId}@example.com`,
       };
       // Call callback with success data
+      callback(null, userData);
     } else {
       // Call callback with error
+      callback(error,null);
     }
   }, 1000);
 }
@@ -41,6 +43,14 @@ function demonstrateCallbacks() {
   console.log('\n=== Callback Demo ===');
   // TODO: Call fetchUserCallback and handle the result
   // Hint: Pass a callback function that logs the result or error
+
+fetchUserCallback(3, (error, data) => {
+    if (error) {
+      console.error('Error fetching user:',error);
+    } else {
+      console.log('Fetched user data:', data);
+    }
+  });
 }
 
 // ============================================
@@ -68,8 +78,10 @@ function fetchUserPromise(userId) {
           email: `user${userId}@example.com`,
         };
         // Resolve with user data
+        resolve(userData);
       } else {
         // Reject with error
+        reject(error);
       }
     }, 1000);
   });
@@ -83,6 +95,13 @@ function demonstratePromises() {
   // TODO: Call fetchUserPromise and chain .then() and .catch()
   // Hint: Use .then() to handle success and .catch() to handle errors
   // Log the results to console
+  fetchUserPromise(5)
+    .then((data) => {
+      console.log('Fetched user data:', data);
+    })
+    .catch((error) => {
+      console.error('Error fetching user:', error);
+    });
 }
 
 // ============================================
@@ -97,6 +116,9 @@ function demonstratePromises() {
 function delay(ms) {
   // TODO: Return a promise that resolves after ms milliseconds
   // Hint: Use setTimeout inside a Promise
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
 }
 
 /**
@@ -109,6 +131,16 @@ async function fetchMultipleUsers(userIds) {
   // Hint: Use a loop and await fetchUserPromise for each ID
   // Use try/catch to handle errors
   // Return an array of all user data
+  const users = [];
+  for (const id of userIds) {
+    try {
+      const userData = await fetchUserPromise(id);
+      users.push(userData);
+    } catch (error) {
+      console.error(`Error fetching user ${id}:`, error);
+    }
+  }
+  return users;
 }
 
 /**
@@ -119,6 +151,12 @@ async function demonstrateAsyncAwait() {
   // TODO: Call fetchMultipleUsers with an array of user IDs
   // Use try/catch to handle any errors
   // Log the results
+  try {
+    const users = await fetchMultipleUsers([6, 7, 8]);
+    console.log('Fetched users:', users);
+  } catch (error) {
+    console.error('Error fetching users:', error);
+  }
 }
 
 // ============================================
@@ -134,6 +172,19 @@ async function fetchUsersParallel(userIds) {
   // TODO: Implement this using Promise.all()
   // Hint: Map userIds to promises, then use Promise.all()
   // This is faster than sequential fetching!
+  const userPromises = userIds.map((id) => fetchUserPromise(id));
+  return Promise.all(userPromises);
+  
+}
+
+async function demonstrateParaellelPromise() {
+  console.log('\n=== Parallel Promise Demo ===');
+  try {
+    const users = await fetchUsersParallel([9, 10, 11]);
+    console.log('Fetched users in parallel:', users);
+  } catch (error) {
+    console.error('Error fetching users in parallel:', error);
+  }
 }
 
 // Export functions
@@ -146,4 +197,5 @@ export {
   fetchMultipleUsers,
   demonstrateAsyncAwait,
   fetchUsersParallel,
+  demonstrateParaellelPromise,
 };
