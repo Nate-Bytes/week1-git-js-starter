@@ -9,8 +9,9 @@
  * @returns {string} String with first letter capitalized
  */
 function capitalize(str) {
-  // Alternate implementation using replace & regex
-  return str.replace(/^./, (c) => c.toUpperCase());
+  // TODO: Implement capitalize
+  if (str.length === 0) return str;
+  return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 /**
