@@ -130,12 +130,15 @@ function updateNote(id, newTitle, newContent) {
  * @returns {boolean} True if deleted, false if not found
  */
 function deleteNote(id) {
-  const originalLength = notes.length;
-
-  notes = notes.filter(note => note.id !== id);
-
-  return notes.length !== originalLength;
+  // TODO: Implement deleteNote
+  // Hint: Use findIndex() to locate the note, then splice() to remove it
+  // Return true if deleted, false if note wasn't found
+  const index = getNoteById(id);
+  if (index === -1) return false;
+  notes.splice(index, 1);
+  return true;
 }
+
 /**
  * Deletes all notes (use with caution!)
  * @returns {number} Number of notes deleted
