@@ -11,7 +11,8 @@
  */
 function add(a, b) {
   // TODO: Implement addition
-  return a + b; 
+  let sum = a + b;
+  return sum; 
 }
 
 /**
