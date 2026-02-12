@@ -11,8 +11,8 @@
  */
 function add(a, b) {
   // TODO: Implement addition
-  const result = a + b;
-  return result;
+  let sum = a + b;
+  return sum; 
 }
 
 /**
