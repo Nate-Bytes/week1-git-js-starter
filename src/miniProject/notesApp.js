@@ -60,7 +60,7 @@ function getAllNotes() {
   // TODO: Implement getAllNotes
   // Hint: Return a copy of the notes array to prevent external modification
   // You can use the spread operator [...notes] or notes.slice()
-  return [...notes];
+  return notes.slice();
 }
 
 /**
