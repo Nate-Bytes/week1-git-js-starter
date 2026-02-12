@@ -10,7 +10,7 @@
  */
 function capitalize(str) {
   // TODO: Implement capitalize
-  if (str.length === 0) return '';
+  if (str.length === 0) return str;
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
