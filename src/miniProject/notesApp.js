@@ -38,14 +38,13 @@ function addNote(title, content) {
   // 4. Push the note to the notes array
   // 5. Return the created note
   let newNote = {
-    id: nextId,
+    id: nextId++,
     title: title,
     content: content,
     createdAt: new Date(),
     updatedAt: new Date()
   };
   notes.push(newNote);
-  nextId++;
   return newNote;
 }
 
